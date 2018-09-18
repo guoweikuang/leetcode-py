@@ -49,9 +49,30 @@ class Solution:
                 right -= 1 # 换下一个右板
         return result
 
+    def max_area_2(self, height):
+        length = len(height)
+        if length < 1:
+            return 0
+
+        result = 0
+        left = 0
+        right = length - 1
+
+        while left < right:
+            h = min(height[left], height[right])
+            area = h * (right - left)
+            if result < area:
+                result = area
+            while (height[left] <= h and left < right):
+                left += 1
+            while (height[right] <= h and left < right):
+                right -= 1
+        return result
+
 
 if __name__ == '__main__':
     solution = Solution()
     height = [1,8,6,2,5,4,8,3,7]
     print(solution.maxArea(height))
+    print(solution.max_area_2(height))
 

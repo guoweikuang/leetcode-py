@@ -54,6 +54,31 @@ class Solution:
                 result += nums_to_roman[s[i]]
         return result
 
+    def romanToInt_v2(self, s):
+            """
+            :type s: str
+            :rtype: int
+            """
+            nums_to_roman = {'M': 1000, 'CM': 900, 'D': 500, 'CD': 400, 'C': 100,
+                             'XC': 90, 'L': 50, 'CL': 40, 'X': 10, 'IX': 9,
+                             'V': 5, 'IV': 4, 'I': 1}
+            length = len(s)
+            i = 0
+            result = 0
+
+            while True:
+                if i <= length - 1:
+                    try:
+                        if nums_to_roman[s[i: i + 2]]:
+                            result += nums_to_roman[s[i: i + 2]]
+                            i += 2
+                    except:
+                        result += nums_to_roman[s[i]]
+                        i += 1
+                else:
+                    break
+            return result
+
 
 if __name__ == '__main__':
     so = Solution()
@@ -62,3 +87,5 @@ if __name__ == '__main__':
     print(so.romanToInt("IX"))
     print(so.romanToInt("LVIII"))
     print(so.romanToInt('MCMXCIV'))
+
+    print(so.romanToInt("MDCCCLXXXIV"))
